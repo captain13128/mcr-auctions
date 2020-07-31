@@ -1,5 +1,12 @@
 "use strict";
 
+const WS_RPC_URL = "wss://mainnet.infura.io/ws/v3/683836c8b9384898a9f99d483ae389bc";
+
+const ETH_FLIP_ADDRESS = "0x09656BC2c0F25380534e03921259e26fe20d19C3";
+const OSM_ADDRESS = "0x778Da1A9c0603DDEd89533E01330A29b494B06Ab";
+const CAT_ADDRESS = "0x44A0Ad6e696820fA192a3dcf37d0cC55a45cBc38";
+const FLIP_ILK = "0x574254432d410000000000000000000000000000000000000000000000000000";
+
 const FLIPPER_ABI = [{
     inputs: [{
         internalType: "address",
@@ -673,12 +680,163 @@ const OSM_ABI = [{
     stateMutability: "view",
     type: "function"
 }];
-const CAT_ABI = [{"inputs":[{"internalType":"address","name":"vat_","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"ilk","type":"bytes32"},{"indexed":true,"internalType":"address","name":"urn","type":"address"},{"indexed":false,"internalType":"uint256","name":"ink","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"art","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"tab","type":"uint256"},{"indexed":false,"internalType":"address","name":"flip","type":"address"},{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"}],"name":"Bite","type":"event"},{"anonymous":true,"inputs":[{"indexed":true,"internalType":"bytes4","name":"sig","type":"bytes4"},{"indexed":true,"internalType":"address","name":"usr","type":"address"},{"indexed":true,"internalType":"bytes32","name":"arg1","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"arg2","type":"bytes32"},{"indexed":false,"internalType":"bytes","name":"data","type":"bytes"}],"name":"LogNote","type":"event"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"ilk","type":"bytes32"},{"internalType":"address","name":"urn","type":"address"}],"name":"bite","outputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"cage","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"deny","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"ilk","type":"bytes32"},{"internalType":"bytes32","name":"what","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"file","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"what","type":"bytes32"},{"internalType":"address","name":"data","type":"address"}],"name":"file","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"ilk","type":"bytes32"},{"internalType":"bytes32","name":"what","type":"bytes32"},{"internalType":"address","name":"flip","type":"address"}],"name":"file","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"ilks","outputs":[{"internalType":"address","name":"flip","type":"address"},{"internalType":"uint256","name":"chop","type":"uint256"},{"internalType":"uint256","name":"lump","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"live","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"rely","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"vat","outputs":[{"internalType":"contract VatLike","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"vow","outputs":[{"internalType":"contract VowLike","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"wards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}];
-
-const ETH_FLIP_ADDRESS = "0x3E115d85D4d7253b05fEc9C0bB5b08383C2b0603";
-const OSM_ADDRESS = "0xf185d0682d50819263941e5f4EacC763CC5C6C42";
-const CAT_ADDRESS = "0x78F2c2AF65126834c51822F56Be0d7469D7A523E";
-const FLIP_ILK = "0x574254432d410000000000000000000000000000000000000000000000000000";
+const CAT_ABI = [{
+    "inputs": [{"internalType": "address", "name": "vat_", "type": "address"}],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+}, {
+    "anonymous": false,
+    "inputs": [{"indexed": true, "internalType": "bytes32", "name": "ilk", "type": "bytes32"}, {
+        "indexed": true,
+        "internalType": "address",
+        "name": "urn",
+        "type": "address"
+    }, {"indexed": false, "internalType": "uint256", "name": "ink", "type": "uint256"}, {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "art",
+        "type": "uint256"
+    }, {"indexed": false, "internalType": "uint256", "name": "tab", "type": "uint256"}, {
+        "indexed": false,
+        "internalType": "address",
+        "name": "flip",
+        "type": "address"
+    }, {"indexed": false, "internalType": "uint256", "name": "id", "type": "uint256"}],
+    "name": "Bite",
+    "type": "event"
+}, {
+    "anonymous": true,
+    "inputs": [{"indexed": true, "internalType": "bytes4", "name": "sig", "type": "bytes4"}, {
+        "indexed": true,
+        "internalType": "address",
+        "name": "usr",
+        "type": "address"
+    }, {"indexed": true, "internalType": "bytes32", "name": "arg1", "type": "bytes32"}, {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "arg2",
+        "type": "bytes32"
+    }, {"indexed": false, "internalType": "bytes", "name": "data", "type": "bytes"}],
+    "name": "LogNote",
+    "type": "event"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "ilk", "type": "bytes32"}, {
+        "internalType": "address",
+        "name": "urn",
+        "type": "address"
+    }],
+    "name": "bite",
+    "outputs": [{"internalType": "uint256", "name": "id", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [],
+    "name": "cage",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "address", "name": "usr", "type": "address"}],
+    "name": "deny",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "ilk", "type": "bytes32"}, {
+        "internalType": "bytes32",
+        "name": "what",
+        "type": "bytes32"
+    }, {"internalType": "uint256", "name": "data", "type": "uint256"}],
+    "name": "file",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "what", "type": "bytes32"}, {
+        "internalType": "address",
+        "name": "data",
+        "type": "address"
+    }],
+    "name": "file",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "ilk", "type": "bytes32"}, {
+        "internalType": "bytes32",
+        "name": "what",
+        "type": "bytes32"
+    }, {"internalType": "address", "name": "flip", "type": "address"}],
+    "name": "file",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{"internalType": "bytes32", "name": "", "type": "bytes32"}],
+    "name": "ilks",
+    "outputs": [{"internalType": "address", "name": "flip", "type": "address"}, {
+        "internalType": "uint256",
+        "name": "chop",
+        "type": "uint256"
+    }, {"internalType": "uint256", "name": "lump", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "live",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "address", "name": "usr", "type": "address"}],
+    "name": "rely",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "vat",
+    "outputs": [{"internalType": "contract VatLike", "name": "", "type": "address"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "vow",
+    "outputs": [{"internalType": "contract VowLike", "name": "", "type": "address"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{"internalType": "address", "name": "", "type": "address"}],
+    "name": "wards",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}];
 
 var web3;
 var usingRemoteProvider = true;
@@ -695,8 +853,7 @@ if (typeof window.ethereum !== 'undefined' && window.ethereum.networkVersion &&
     }
 }
 if (usingRemoteProvider) {
-    var infura = "wss://mainnet.infura.io/ws/v3/24537662f67d4531a1e43e486ea45eca";
-    var provider = new Web3.providers.WebsocketProvider(infura);
+    var provider = new Web3.providers.WebsocketProvider(WS_RPC_URL);
     web3 = new Web3(provider);
     console.log("Using remote web3 provider");
 }
@@ -728,7 +885,7 @@ var getFlipEvents = function getFlipEvents(fromBlockNumber) {
 var osmPrice = 0;
 var getOsmPrice = function getOsmPrice(blockNumber) {
     return osmContract.getPastEvents("LogValue", {
-            fromBlock: blockNumber - 600,
+            fromBlock: 0,
             toBlock: blockNumber
         },
         function (err, result) {
@@ -796,10 +953,10 @@ var showEvents = async function showEvents(someID) {
             values += "ID: <b>" + flipId + "</b> | ";
 
             let lot = event.returnValues.lot / 10 ** 18;
-            values += "lot: " + lot.toFixed(3) + " btc | ";
+            values += "лот (lot): " + lot.toFixed(3) + " btc | ";
 
             let tab = event.returnValues.tab / 10 ** 27 / 10 ** 18;
-            values += "tab: " + tab.toFixed(3) + " dai | ";
+            values += "необходимо (tab): " + tab.toFixed(3) + " mcr | ";
 
             osmPrice = 0;
             await getOsmPrice(event.blockNumber);
@@ -825,9 +982,9 @@ var showEvents = async function showEvents(someID) {
             };
 
             if (osmPrice > 0) {
-                values += "Maker OSM Price: $" + auctions[flipId]["kickPrice"] + " | ";
+                values += "Monolithos OSM Цена: ₽" + auctions[flipId]["kickPrice"] + " | ";
             } else {
-                values += "Maker OSM Price: $---,-- | ";
+                values += "Monolithos OSM Цена: ₽---,-- | ";
             }
         } else if (event.raw.topics[0] === TEND) {
             eventType = "TEND";
@@ -841,11 +998,11 @@ var showEvents = async function showEvents(someID) {
             values += "ID: <b>" + flipId + "</b> | ";
 
             let lot = parseInt(event.raw.topics[3], 16) / 10 ** 18;
-            values += "lot: " + lot.toFixed(3) + " btc | ";
+            values += "лот (lot): " + lot.toFixed(3) + " btc | ";
 
             let raw = event.raw.data.slice(288, -248);
             let bid = parseInt(raw, 16) / 10 ** 27 / 10 ** 18;
-            values += "bid: " + bid.toFixed(3) + " dai | ";
+            values += "предложение (bid): " + bid.toFixed(3) + " mcr | ";
 
             osmPrice = 0;
             await getOsmPrice(event.blockNumber);
@@ -866,9 +1023,9 @@ var showEvents = async function showEvents(someID) {
                 } else {
                     values += "" + diff.toFixed(1) + " % | ";
                 }
-                values += "Price: $" + auctions[flipId]["bidPrice"] + " | ";
+                values += "Цена: ₽" + auctions[flipId]["bidPrice"] + " | ";
             } else {
-                values += "--,-- % | Price: $---,-- | ";
+                values += "--,-- % | Цена: ₽---,-- | ";
             }
         } else if (event.raw.topics[0] === DENT) {
             eventType = "DENT";
@@ -882,11 +1039,11 @@ var showEvents = async function showEvents(someID) {
             values += "ID: <b>" + flipId + "</b> | ";
 
             let lot = parseInt(event.raw.topics[3], 16) / 10 ** 18;
-            values += "lot: " + lot.toFixed(3) + " btc | ";
+            values += "лот (lot): " + lot.toFixed(3) + " btc | ";
 
             let raw = event.raw.data.slice(288, -248);
             let bid = parseInt(raw, 16) / 10 ** 27 / 10 ** 18;
-            values += "bid: " + bid.toFixed(3) + " dai | ";
+            values += "предложение (bid): " + bid.toFixed(3) + " mcr | ";
 
             osmPrice = 0;
             await getOsmPrice(event.blockNumber);
@@ -907,9 +1064,10 @@ var showEvents = async function showEvents(someID) {
                 } else {
                     values += "" + diff.toFixed(2) + " % | ";
                 }
-                values += "Price: $" + auctions[flipId]["bidPrice"] + " | ";
+                values += "Цена: ₽" + auctions[flipId]["bidPrice"] + " | ";
+                values += "Цена сделки: ₽" + auctions[flipId]["paidPrice"] + " | ";
             } else {
-                values += "--,-- % | Price: $---,-- | ";
+                values += "--,-- % | Цена: ₽---,-- | ";
             }
         } else if (event.raw.topics[0] === DEAL) {
             eventType = "DEAL";
@@ -931,10 +1089,10 @@ var showEvents = async function showEvents(someID) {
             auctions[flipId]["state"] = "CLOSE";
 
             if (!osmPrice) {
-                values += "Paid Rate: $" + auctions[flipId]["paidPrice"] + " dai/btc (+-.--%) | ";
-                values += "--,-- % | Price: $---,-- | ";
+                values += "Курс покупки: ₽" + auctions[flipId]["paidPrice"] + " mcr/btc (+-.--%) | ";
+                values += "--,-- % | Цена: ₽---,-- | ";
             } else {
-                values += "Paid Rate: $" + auctions[flipId]["paidPrice"] + " dai/btc ";
+                values += "Курс покупки: ₽" + auctions[flipId]["paidPrice"] + " mcr/btc ";
                 let diff = ((auctions[flipId]["paidPrice"] / auctions[flipId]["dealPrice"]) - 1) * 100;
                 if (diff > 0) {
                     values += "(+" + diff.toFixed(2) + "%) ~ ";
@@ -943,13 +1101,13 @@ var showEvents = async function showEvents(someID) {
                     values += "(" + diff.toFixed(2) + "%) ~ ";
                     values += `<b class='detail-btn' onclick='showAuctionDetails(${flipId})'>Won! 📋</b> | `
                 }
-                values += "Price: $" + auctions[flipId]["dealPrice"] + " | ";
+                values += "Цена: ₽" + auctions[flipId]["dealPrice"] + " | ";
             }
         } else if (event.raw.topics[0] === TICK) {
             eventType = "TICK";
             flipId = parseInt(event.raw.topics[2], 16);
             values += "ID: <b>" + flipId + "</b> | ";
-            values += "Time extended! | ";
+            values += "Время продлено! | ";
         } else if (event.raw.topics[0] === FILE) {
             auctions[0] = {id: 0, type: "FILE"};
             eventType = "FILE";
@@ -957,35 +1115,35 @@ var showEvents = async function showEvents(someID) {
             const TAU = "0x7461750000000000000000000000000000000000000000000000000000000000";
             const TTL = "0x74746c0000000000000000000000000000000000000000000000000000000000";
             if (event.raw.topics[2] === BEG) {
-                values += "WHAT: <b> BEG </b> (minimum bid increase) | ";
+                values += "КЛЮЧ: <b> BEG </b> (увеличение минимальной ставки в процентах) | ";
                 let file_value = parseInt(event.raw.topics[3]) / 10 ** 18;
                 file_value = (file_value - 1) * 100;
-                values += "VALUE: <b>" + file_value.toFixed(2) + " %</b> | ";
+                values += "ЗНАЧЕНИЕ: <b>" + file_value.toFixed(2) + " %</b> | ";
             } else if (event.raw.topics[2] === TAU) {
-                values += "WHAT: <b> TAU </b> (maximum auction duration) | ";
+                values += "КЛЮЧ: <b> TAU </b> (максимальная продолжительность аукциона) | ";
                 let file_value = parseInt(event.raw.topics[3]);
                 file_value = file_value / 60 / 60;
-                values += "VALUE: <b>" + file_value.toFixed(1) + " hours</b> | ";
+                values += "ЗНАЧЕНИЕ: <b>" + file_value.toFixed(1) + " часов</b> | ";
             } else if (event.raw.topics[2] === TTL) {
-                values += "WHAT: <b> TTL </b> (bid lifetime / max bid duration) | ";
+                values += "КЛЮЧ: <b> TTL </b> (срок действия ставки / максимальная продолжительность ставки) | ";
                 let file_value = parseInt(event.raw.topics[3]);
                 file_value = file_value / 60;
-                values += "VALUE: <b>" + file_value.toFixed(1) + " minutes</b> | ";
+                values += "ЗНАЧЕНИЕ: <b>" + file_value.toFixed(1) + " минут</b> | ";
             } else {
-                values += "WHAT: <b>UKNOWN</b> | ";
+                values += "КЛЮЧ: <b>UKNOWN</b> | ";
                 console.log(event.raw.topics);
             }
-            values += "New Flipper Update! | ";
+            values += "Новое оьновление Flipper! | ";
         } else if (event.raw.topics[0] === RELY) {
             eventType = "RELY";
-            values += "WHAT: <b>Allow to call auth'ed methods --</b> | ";
+            values += "ДЕЙСТВИЕ: <b>Разрешить вызывать методы auth'ed --</b> | ";
             let usr = event.raw.topics[2];
-            values += "TO: <b>0x" + usr.slice(-40) + "</b> | ";
+            values += "СУБЪЕКТ: <b>0x" + usr.slice(-40) + "</b> | ";
         } else if (event.raw.topics[0] === DENY) {
             eventType = "DENY";
-            values += "WHAT: <b>Disallow to call auth'ed methods</b> | ";
+            values += "ДЕЙСТВИЕ: <b>Запретить вызывать методы auth'ed --</b> | ";
             let usr = event.raw.topics[2];
-            values += "TO: <b>0x" + usr.slice(-40) + "</b> | ";
+            values += "СУБЪЕКТ: <b>0x" + usr.slice(-40) + "</b> | ";
         } else {
             console.log("Uknown event");
             console.log(event);
@@ -1001,7 +1159,7 @@ var showEvents = async function showEvents(someID) {
                 auctions[flipId]["txFrom"] = tx.from;
             }
             let txHref = `https://etherscan.io/tx/${event.transactionHash}`;
-            let txLink = `<a target="_blank" href="${txHref}">Tx:..${event.transactionHash.slice(-3)} Info</a>`;
+            let txLink = `<a target="_blank" href="${txHref}">Tx:..${event.transactionHash.slice(-3)} информация</a>`;
             values += `from: ${from} | ${txLink} >>`;
         });
 
@@ -1026,7 +1184,7 @@ var showEvents = async function showEvents(someID) {
 
 // Fetch old events to populate list at initial load
 var lastBlockfetch = 0;
-var blocksBack = 18095 * 2; // 18095 -> 3.14 days blocks count
+var blocksBack = 18095; // 18095 -> 3.14 days blocks count
 var fetchAuctions = async function fetchAuctions(someID) {
     lastBlockfetch = await web3.eth.getBlockNumber();
     let fromBlock = lastBlockfetch - blocksBack;
@@ -1104,9 +1262,9 @@ function filterAuctionById() {
     }
 }
 
-function showAuctionDetails(id){
+function showAuctionDetails(id) {
     let auction = auctions[id];
-    if (!auction){
+    if (!auction) {
         alert('Error showing auction details');
         return;
     }
@@ -1116,35 +1274,35 @@ function showAuctionDetails(id){
         detailPanel.hide();
     }
 
-    let msg = `> <b>AUCTION ID: ${id}</b>`;
+    let msg = `> <b>АУКЦИОН ID: ${id}</b>`;
     msg += '<hr/>';
 
-    msg += 'Started: <br/>';
-    msg += `- DATE: ${auction.kickDate} <br/>`;
-    msg += `- LOT: ${auction.kickLot.toLocaleString('en')} btc - BID: ${auction.bid.toLocaleString('en')} dai <br/>`;
-    msg += `- BTC OSM: $${auction.kickPrice} btc/dai <br/><br/>`;
+    msg += 'Начало: <br/>';
+    msg += `- ДАТА: ${auction.kickDate} <br/>`;
+    msg += `- ЛОТ (LOT): ${auction.kickLot.toLocaleString('en')} btc - ПРЕДЛОЖЕНИЕ (BID): ${auction.bid.toLocaleString('en')} mcr <br/>`;
+    msg += `- BTC OSM: ₽${auction.kickPrice} btc/mcr <br/><br/>`;
 
-    msg += `Bids received: ${auction.tends + auction.dents} <br/><br/>`;
+    msg += `Полученные заявки: ${auction.tends + auction.dents} <br/><br/>`;
 
-    msg += 'Last Bid:<br/>';
-    msg += `- DATE: ${auction.bidDate} <br/>`;
-    msg += `- FROM: ${auction.bidFrom} <br/>`;
-    msg += `- LOT: ${auction.lot.toLocaleString('en')} btc - BID: ${auction.bid.toLocaleString('en')} dai <br/>`;
-    msg += `- PAID PRICE: $${auction.paidPrice} btc/dai <br/>`;
-    msg += `- BTC OSM: $${auction.bidPrice} btc/dai <br/><br/>`;
+    msg += 'Последнее предложение:<br/>';
+    msg += `- ДАТА: ${auction.bidDate} <br/>`;
+    msg += `- ОТПРАВИТЕЛЬ (FROM): ${auction.bidFrom} <br/>`;
+    msg += `- ЛОТ (LOT): ${auction.lot.toLocaleString('en')} btc - ПРЕДЛОЖЕНИЕ (BID): ${auction.bid.toLocaleString('en')} mcr <br/>`;
+    msg += `- ЦЕНА СДЕЛКИ (PAID PRICE): ₽${auction.paidPrice} btc/mcr <br/>`;
+    msg += `- BTC OSM: ₽${auction.bidPrice} btc/mcr <br/><br/>`;
 
-    msg += 'Ended: <br/>';
-    msg += `- DATE: ${auction.dealDate} <br/>`;
-    msg += `- FROM: ${auction.txFrom} <br/>`;
-    msg += `- PAID PRICE: $${auction.paidPrice} btc/dai <br/>`;
-    msg += `- BTC OSM: $${auction.dealPrice} btc/dai <br/><br/>`;
+    msg += 'Оконченный: <br/>';
+    msg += `- ДАТА: ${auction.dealDate} <br/>`;
+    msg += `- ОТПРАВИТЕЛЬ: ${auction.txFrom} <br/>`;
+    msg += `- ЦЕНА СДЕЛКИ (PAID PRICE): ₽${auction.paidPrice} btc/mcr <br/>`;
+    msg += `- BTC OSM: ₽${auction.dealPrice} btc/mcr <br/><br/>`;
 
 
-    msg += 'Results: <br/>';
+    msg += 'РЕЗУЛЬТАТЫ: <br/>';
     let priceDiff = ((auction["paidPrice"] / auction["dealPrice"]) - 1) * 100;
-    msg += `- PRICE DIFF: ${priceDiff.toFixed(2)}% <br/>`;
-    let daiProfit =  (auction.lot * auction.dealPrice) - auction.bid;
-    msg += `- PROFIT: <b>${daiProfit.toLocaleString('en')} dai</b>`;
+    msg += `- РАЗНИЦА В ЦЕНЕ: ${priceDiff.toFixed(2)}% <br/>`;
+    let daiProfit = (auction.lot * auction.dealPrice) - auction.bid;
+    msg += `- ПРИБЫЛЬ: <b>${daiProfit.toLocaleString('en')} mcr</b>`;
 
     msg += '<hr/>';
     msg += '<a style="float: right;" onclick="hideAuctionDetails()">CLOSE<a/>';
@@ -1189,7 +1347,29 @@ async function updateGlobals() {
 
     let lastBlock = await web3.eth.getBlockNumber();
     await getOsmPrice(lastBlock);
-    globalsPanel.find('#osm-btc').text("$" + osmPrice);
+    globalsPanel.find('#osm-btc').text("₽" + osmPrice);
+}
+
+function hideEmptyMessage() {
+    let noResultsTag = document.getElementById("no-results");
+    noResultsTag.style.display = "none";
+}
+
+async function loadedMoreBlocks() {
+    if (usingRemoteProvider) {
+        let msg = 'Sorry, this feature is disabled using the remote ETH provider.\n\n' +
+            'Try to install MetaMask and select Mainnet network';
+        alert(msg);
+        return;
+    }
+
+    hideFilterSearch();
+    hideEmptyMessage();
+    events = [];
+    auctions = {};
+    eventsLoaded = false;
+    blocksBack = await web3.eth.getBlockNumber();
+    fetchAuctions(0);
 }
 
 

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="author" content="MonolithosDAO"/>
+    <meta name="version" content="1.6.1"/>
+    <title>MCR Auctions | Flap</title>
+    <meta name="description" content="The place to see all MonolithosDAO Auctions. Welcome to the open blockchains.">
+    <meta name="keywords" content="MonolithosDAO mcr eth btc auction flip flap flop">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+<!--    <meta name="twitter:card" content="summary">-->
+<!--    <meta name="twitter:site" content="@martinlsanchez">-->
+<!--    <meta name="twitter:title" content="Dai Auctions | Flap">-->
+<!--    <meta name="twitter:description" content="The place to see all MakerDao Auctions. Welcome to the open blockchains.">-->
+<!--    <meta name="twitter:creator" content="@martinlsanchez">-->
+<!--    <meta name="twitter:image" content="https://daiauctions.com/img/dai-share.png">-->
+
+    <meta property="og:title" content="MCR Auctions | Flap"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://mcrauctions.com/flap"/>
+    <meta property="og:image" content="https://mcrauctions.com/img/mcr-share.png"/>
+    <meta property="og:description" content="The place to see all MonolithosDAO Auctions. Welcome to the open blockchains."/>
+    <meta property="og:site_name" content="MCR Auctions | Flap"/>
+
+    <link rel="icon" type="icon" href="../img/favicon.ico"/>
+    <link rel="stylesheet" href="../css/styles_min.css" media="all"/>
+</head>
+<body>
+<h1>
+    <a href="/"><img alt="mcr logo" width="50" src="../img/MCR.png"/></a>
+    Monolithos Surplus Auctions
+</h1>
+<div id="languages">
+<!--    <a href="../zh/flap.html">中文</a>-->
+    <a href="../flap.html">Русский</a>
+</div>
+<div id="globals">
+    <div style="display: none;" class="box" title="Price of official MonolithosDAO MDT feeds">
+        <b id="mkr">₽---,--</b><br/>
+        <span>MDT Price [mcr]</span>
+    </div>
+    <div class="box" title="Surplus Available to start a flap auction">
+        <b id="available">--,---.--</b><br/>
+        <span>Surplus Available [mcr]</span>
+    </div>
+    <div class="box" title="Fixed LOT size">
+        <b id="bump">--,---</b><br/>
+        <span>BUMP [mcr]</span>
+    </div>
+    <div class="box" title="Minimum bid increase">
+        <b id="beg">-.--</b><br/>
+        <span>BEG [%]</span>
+    </div>
+    <div class="box" title="Maximum bid duration">
+        <b id="ttl">--</b><br/>
+        <span>TTL [min]</span>
+    </div>
+    <div class="box" title="Maximum auction duration">
+        <b id="tau">--</b><br/>
+        <span>TAU [hour]</span>
+    </div>
+<!--    <div class="box" title="Detailed Flap auction glossary link">-->
+<!--        <b id="glossary">-->
+<!--            <a target="_blank" href="https://docs.makerdao.com/smart-contract-modules/system-stabilizer-module/flap-detailed-documentation#flapper-glossary">Flapper</a>-->
+<!--        </b><br/>-->
+<!--        <span>[glossary]</span>-->
+<!--    </div>-->
+</div>
+<div id="filter-panel">
+    <span id="search">
+        <label for="fliter-id">Filter by ID:</label>
+        <input id="fliter-id" type="number" onchange="filterAuctionById();"/>
+        <a href="#" onclick="filterAuctionById();">GO!</a>
+    </span>
+    <span id="no-results">There were NO auctions found in the last days</span>
+    <i id="last-update"></i>
+    <div class="links-panel">
+        <span style="font-weight: normal;">FLIP [</span>
+        <a href="flip_eth.html" title="ETH Auctions with MCR">ETH</a> /
+        <a href="flip_btc.html" title="WBTC Auctions with MCR">WBTC</a>
+        <span style="font-weight: normal;">]</span> |
+        <a href="#" class="active" title="MCR Auctions with MDT">FLAP [MCR]</a> |
+        <a href="flop.html" title="MDT Auctions with MCR">FLOP [MDT]</a>
+    </div>
+</div>
+<div id="auction-details"></div>
+<div id="app">
+    <div class="row"> >> Fetching data from mainnet...</div>
+</div>
+<div id="info">
+    <p>
+        All data from last 3.14 days |
+        Maybe try to <a href="#" onclick="loadAllHistory()">load all history</a> if you are curious 😁
+    </p>
+<!--    <p>-->
+<!--        More about <a target="_blank" href="https://makerdao.com">MakerDao</a> Auctions in this amazing-->
+<!--        <a href="https://docs.makerdao.com/smart-contract-modules/system-stabilizer-module/flap-detailed-documentation"-->
+<!--           target="_blank">Flapper Docs</a>-->
+<!--    </p>-->
+</div>
+<p class="made-by">
+    Made with ❤ by <a target="_blank" href="https://twitter.com/MonolithosDAO" class="author">MonolithosDAO</a>
+    <br/><br/>
+    2020
+    <br/><br/>
+<!--    <i>-->
+<!--        <b>Toss a coin to your witcher ➡‍ daiauctions.eth</b>-->
+<!--        <span>(0x2392C9d44F8D70D3874C8a74D28CB4c82412aCF7)</span>-->
+<!--    </i>-->
+<!--    <br/>-->
+    <i>
+        <b>
+            Take a look at the
+            <a target="_blank" href="https://github.com/monolithos/">Source code</a>
+        </b>
+    </i>
+    <br/><br/>
+<!--    <i>-->
+<!--        With an awesome language contribution of <a target="_blank" href="https://github.com/496080199">xiaopao</a>,<br/>-->
+<!--        some bug fixing of <a target="_blank" href="https://twitter.com/andy8052">@andy8052</a> and<br/>-->
+<!--        magic/advice/support of-->
+<!--        <a target="_blank" href="https://twitter.com/gonzalezramiro">ramoide</a>,-->
+<!--        <a target="_blank" href="https://twitter.com/natanbaredes">natonamco</a> &-->
+<!--        <a target="_blank" href="https://twitter.com/nanexcool">@nanexcool</a>-->
+<!--    </i>-->
+</p>
+<script src="js/web3.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/flap_min.js"></script>
+</body>
+</html>

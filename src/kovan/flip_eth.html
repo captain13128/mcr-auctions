@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="author" content="MonolithosDAO"/>
+    <meta name="version" content="1.6.1"/>
+    <title>MCR Аукционы| Flip | ETH</title>
+    <meta name="description" content="Место, где можно увидеть все аукционы MonolithosDAO. Добро пожаловать в открытый блокчейн.">
+    <meta name="keywords" content="MonolithosDAO mcr eth btc аукцион flip flap flop">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!--    <meta name="twitter:card" content="summary">-->
+    <!--    <meta name="twitter:site" content="@martinlsanchez">-->
+    <!--    <meta name="twitter:title" content="Dai Auctions">-->
+    <!--    <meta name="twitter:description" content="The place to see all MakerDao Auctions. Welcome to the open blockchains.">-->
+    <!--    <meta name="twitter:creator" content="@martinlsanchez">-->
+    <!--    <meta name="twitter:image" content="https://daiauctions.com/img/dai-share.png">-->
+
+    <meta property="og:title" content="MCR Auctions"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://mcrauctions.com"/>
+    <meta property="og:image" content="https://mcrauctions.com/img/mcr-share.png"/>
+    <meta name="description" content="Место, где можно увидеть все аукционы MonolithosDAO. Добро пожаловать в открытый блокчейн."/>
+    <meta property="og:site_name" content="MCR Аукционы | Flip ETH "/>
+
+    <link rel="icon" type="icon" href="../img/favicon.ico"/>
+    <link rel="stylesheet" href="../css/styles_min.css" media="all"/>
+</head>
+<body>
+<h1>
+    <a href="/"><img alt="dai logo" width="50" src="../img/MCR.png"/></a>
+    Monolithos залоговые аукционы
+</h1>
+<!--<div id="languages">-->
+<!--    <a href="en/flip_eth.html">English</a>-->
+
+<!--</div>-->
+<div id="networks">
+    <a href="../flip_eth.html">mainnet</a>
+</div>
+<div id="globals">
+    <div class="box" title="Официальная цена MonolithosDAO ETH OSM">
+        <b id="osm-eth">₽---.--</b><br/>
+        <span>Цена OSM ETH [mcr]</span>
+    </div>
+    <div class="box" title="Штраф за лквидацию хранилища">
+        <b id="chop">--.-</b><br/>
+        <span>CHOP [%]</span>
+    </div>
+    <div class="box" title="Максимальный размер лота">
+        <b id="lump">--.--</b><br/>
+        <span>LUMP [eth]</span>
+    </div>
+    <div class="box" title="Минимальное увеличение ставки">
+        <b id="beg">-.--</b><br/>
+        <span>BEG [%]</span>
+    </div>
+    <div class="box" title="Максимальная продолжительность ставки">
+        <b id="ttl">--</b><br/>
+        <span>TTL [минута]</span>
+    </div>
+    <div class="box" title="Максимальная продолжительность аукциона">
+        <b id="tau">--</b><br/>
+        <span>TAU [час]</span>
+    </div>
+    <!--    <div class="box" title="Detailed Flap auction glossary link">-->
+    <!--        <b id="glossary">-->
+    <!--            <a target="_blank" href="https://docs.makerdao.com/smart-contract-modules/collateral-module/flipper-detailed-documentation">Flipper</a>-->
+    <!--        </b><br/>-->
+    <!--        <span>[glossary]</span>-->
+    <!--    </div>-->
+    <!--    <div class="box" title="All Flip ETH Auctions recorded on BT">-->
+    <!--        <b>-->
+    <!--            <a href="../flip_eth/black-thursday">Archive</a>-->
+    <!--        </b><br/>-->
+    <!--        <span>[12 Mar 2020]</span>-->
+    <!--    </div>-->
+</div>
+<div id="filter-panel">
+    <span id="search">
+        <label for="fliter-id">Фильтрация по ID:</label>
+        <input id="fliter-id" type="number" onchange="filterAuctionById();"/>
+        <a href="#" onclick="filterAuctionById();">GO!</a>
+    </span>
+    <span id="no-results">В последние дни аукционов не было найдено</span>
+    <i id="last-update"></i>
+    <div class="links-panel">
+        <b>FLIP [</b>
+        <a class="active" title="ETH аукционы с MCR">ETH</a> /
+        <a href="flip_btc.html" title="WBTC аукционы с MCR">WBTC</a>
+        <b>]</b> |
+        <a href="flop.html" title="MCR аукционы с MDT">FLAP [MCR]</a> |
+        <a href="flop.html" title="MDT аукционы с MCR">FLOP [MDT]</a>
+    </div>
+</div>
+<div id="auction-details"></div>
+<div id="app">
+    <div class="row"> >> Загрузка данных из mainnet...</div>
+</div>
+<div id="info">
+    <p>
+        Все данные за последние 3,14 дня |
+        Можете попробовать <a href="#" onclick="loadedMoreBlocks()">загрузить всю историю</a> если Вам это интересно 😁
+    </p>
+
+    <!--    <p>-->
+    <!--        All data from last 3.14 days |-->
+    <!--        More info about <a target="_blank" href="https://makerdao.com">MakerDao</a>-->
+    <!--        Auctions in this amazing-->
+    <!--        <a href="https://docs.makerdao.com/smart-contract-modules/collateral-module/flipper-detailed-documentation"-->
+    <!--           target="_blank">Flipper Docs</a>-->
+    <!--    </p>-->
+</div>
+<p class="made-by">
+    Сделано с ❤  <a target="_blank" href="https://twitter.com/MonolithosDAO" class="author">MonolithosDAO</a>
+    <br/><br/>
+    2020
+    <br/><br/>
+    <!--    <i>-->
+    <!--        <b>Toss a coin to your witcher ➡‍ daiauctions.eth</b>-->
+    <!--        <span>(0x2392C9d44F8D70D3874C8a74D28CB4c82412aCF7)</span>-->
+    <!--    </i>-->
+    <!--    <br/>-->
+    <i>
+        <b>
+            Взгляните на это
+            <a target="_blank" href="https://github.com/monolithos/">Исходный код</a>
+        </b>
+    </i>
+    <br/><br/>
+    <!--    <i>-->
+    <!--        With an awesome language contribution of <a target="_blank" href="https://github.com/496080199">xiaopao</a>,<br/>-->
+    <!--        some bug fixing of <a target="_blank" href="https://twitter.com/andy8052">@andy8052</a> and<br/>-->
+    <!--        magic/advice/support of-->
+    <!--        <a target="_blank" href="https://twitter.com/gonzalezramiro">ramoide</a>,-->
+    <!--        <a target="_blank" href="https://twitter.com/natanbaredes">natonamco</a> &-->
+    <!--        <a target="_blank" href="https://twitter.com/nanexcool">@nanexcool</a>-->
+    <!--    </i>-->
+</p>
+<script src="js/web3.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/flip_eth.js"></script>
+</body>
+</html>

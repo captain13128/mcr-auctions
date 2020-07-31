@@ -1,6 +1,13 @@
 "use strict";
 
-// Contracts ABI
+const WS_RPC_URL = "wss://mainnet.infura.io/ws/v3/683836c8b9384898a9f99d483ae389bc";
+
+const FLAP_ADDRESS = "0xeFCAc4615721Ba90796BeCB8e633b38F8bF8FbF4";
+const MEDIANIZER_ADDRESS = "0xd4553Ee5693A926E0b9f5B0726ee51773F97df85";
+const VAT_ADDRESS = "0x851F61280295837588373fFdc3d3315Ac085119f";
+const VOW_ADDRESS = "0xAE491648E939c69724cD43e34ddF8C7B13868682";
+
+
 const FLAPPER_ABI = [{
     "inputs": [{
         "internalType": "address",
@@ -614,15 +621,342 @@ const VOW_ABI = [{
     "stateMutability": "view",
     "type": "function"
 }];
-const VAT_ABI = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":true,"inputs":[{"indexed":true,"internalType":"bytes4","name":"sig","type":"bytes4"},{"indexed":true,"internalType":"bytes32","name":"arg1","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"arg2","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"arg3","type":"bytes32"},{"indexed":false,"internalType":"bytes","name":"data","type":"bytes"}],"name":"LogNote","type":"event"},{"constant":true,"inputs":[],"name":"Line","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"cage","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"can","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"dai","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"debt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"deny","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"ilk","type":"bytes32"},{"internalType":"bytes32","name":"what","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"file","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"what","type":"bytes32"},{"internalType":"uint256","name":"data","type":"uint256"}],"name":"file","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"ilk","type":"bytes32"},{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"wad","type":"uint256"}],"name":"flux","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"i","type":"bytes32"},{"internalType":"address","name":"u","type":"address"},{"internalType":"int256","name":"rate","type":"int256"}],"name":"fold","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"ilk","type":"bytes32"},{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"int256","name":"dink","type":"int256"},{"internalType":"int256","name":"dart","type":"int256"}],"name":"fork","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"i","type":"bytes32"},{"internalType":"address","name":"u","type":"address"},{"internalType":"address","name":"v","type":"address"},{"internalType":"address","name":"w","type":"address"},{"internalType":"int256","name":"dink","type":"int256"},{"internalType":"int256","name":"dart","type":"int256"}],"name":"frob","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"gem","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"i","type":"bytes32"},{"internalType":"address","name":"u","type":"address"},{"internalType":"address","name":"v","type":"address"},{"internalType":"address","name":"w","type":"address"},{"internalType":"int256","name":"dink","type":"int256"},{"internalType":"int256","name":"dart","type":"int256"}],"name":"grab","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"heal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"hope","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"ilks","outputs":[{"internalType":"uint256","name":"Art","type":"uint256"},{"internalType":"uint256","name":"rate","type":"uint256"},{"internalType":"uint256","name":"spot","type":"uint256"},{"internalType":"uint256","name":"line","type":"uint256"},{"internalType":"uint256","name":"dust","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"ilk","type":"bytes32"}],"name":"init","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"live","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"move","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"nope","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"usr","type":"address"}],"name":"rely","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"sin","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"ilk","type":"bytes32"},{"internalType":"address","name":"usr","type":"address"},{"internalType":"int256","name":"wad","type":"int256"}],"name":"slip","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"u","type":"address"},{"internalType":"address","name":"v","type":"address"},{"internalType":"uint256","name":"rad","type":"uint256"}],"name":"suck","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"},{"internalType":"address","name":"","type":"address"}],"name":"urns","outputs":[{"internalType":"uint256","name":"ink","type":"uint256"},{"internalType":"uint256","name":"art","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"vice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"wards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}];
+const VAT_ABI = [{
+    "inputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+}, {
+    "anonymous": true,
+    "inputs": [{"indexed": true, "internalType": "bytes4", "name": "sig", "type": "bytes4"}, {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "arg1",
+        "type": "bytes32"
+    }, {"indexed": true, "internalType": "bytes32", "name": "arg2", "type": "bytes32"}, {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "arg3",
+        "type": "bytes32"
+    }, {"indexed": false, "internalType": "bytes", "name": "data", "type": "bytes"}],
+    "name": "LogNote",
+    "type": "event"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "Line",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [],
+    "name": "cage",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{"internalType": "address", "name": "", "type": "address"}, {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+    }],
+    "name": "can",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{"internalType": "address", "name": "", "type": "address"}],
+    "name": "dai",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "debt",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "address", "name": "usr", "type": "address"}],
+    "name": "deny",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "ilk", "type": "bytes32"}, {
+        "internalType": "bytes32",
+        "name": "what",
+        "type": "bytes32"
+    }, {"internalType": "uint256", "name": "data", "type": "uint256"}],
+    "name": "file",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "what", "type": "bytes32"}, {
+        "internalType": "uint256",
+        "name": "data",
+        "type": "uint256"
+    }],
+    "name": "file",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "ilk", "type": "bytes32"}, {
+        "internalType": "address",
+        "name": "src",
+        "type": "address"
+    }, {"internalType": "address", "name": "dst", "type": "address"}, {
+        "internalType": "uint256",
+        "name": "wad",
+        "type": "uint256"
+    }],
+    "name": "flux",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "i", "type": "bytes32"}, {
+        "internalType": "address",
+        "name": "u",
+        "type": "address"
+    }, {"internalType": "int256", "name": "rate", "type": "int256"}],
+    "name": "fold",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "ilk", "type": "bytes32"}, {
+        "internalType": "address",
+        "name": "src",
+        "type": "address"
+    }, {"internalType": "address", "name": "dst", "type": "address"}, {
+        "internalType": "int256",
+        "name": "dink",
+        "type": "int256"
+    }, {"internalType": "int256", "name": "dart", "type": "int256"}],
+    "name": "fork",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "i", "type": "bytes32"}, {
+        "internalType": "address",
+        "name": "u",
+        "type": "address"
+    }, {"internalType": "address", "name": "v", "type": "address"}, {
+        "internalType": "address",
+        "name": "w",
+        "type": "address"
+    }, {"internalType": "int256", "name": "dink", "type": "int256"}, {
+        "internalType": "int256",
+        "name": "dart",
+        "type": "int256"
+    }],
+    "name": "frob",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{"internalType": "bytes32", "name": "", "type": "bytes32"}, {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+    }],
+    "name": "gem",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "i", "type": "bytes32"}, {
+        "internalType": "address",
+        "name": "u",
+        "type": "address"
+    }, {"internalType": "address", "name": "v", "type": "address"}, {
+        "internalType": "address",
+        "name": "w",
+        "type": "address"
+    }, {"internalType": "int256", "name": "dink", "type": "int256"}, {
+        "internalType": "int256",
+        "name": "dart",
+        "type": "int256"
+    }],
+    "name": "grab",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "uint256", "name": "rad", "type": "uint256"}],
+    "name": "heal",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "address", "name": "usr", "type": "address"}],
+    "name": "hope",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{"internalType": "bytes32", "name": "", "type": "bytes32"}],
+    "name": "ilks",
+    "outputs": [{"internalType": "uint256", "name": "Art", "type": "uint256"}, {
+        "internalType": "uint256",
+        "name": "rate",
+        "type": "uint256"
+    }, {"internalType": "uint256", "name": "spot", "type": "uint256"}, {
+        "internalType": "uint256",
+        "name": "line",
+        "type": "uint256"
+    }, {"internalType": "uint256", "name": "dust", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "ilk", "type": "bytes32"}],
+    "name": "init",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "live",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "address", "name": "src", "type": "address"}, {
+        "internalType": "address",
+        "name": "dst",
+        "type": "address"
+    }, {"internalType": "uint256", "name": "rad", "type": "uint256"}],
+    "name": "move",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "address", "name": "usr", "type": "address"}],
+    "name": "nope",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "address", "name": "usr", "type": "address"}],
+    "name": "rely",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{"internalType": "address", "name": "", "type": "address"}],
+    "name": "sin",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "bytes32", "name": "ilk", "type": "bytes32"}, {
+        "internalType": "address",
+        "name": "usr",
+        "type": "address"
+    }, {"internalType": "int256", "name": "wad", "type": "int256"}],
+    "name": "slip",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{"internalType": "address", "name": "u", "type": "address"}, {
+        "internalType": "address",
+        "name": "v",
+        "type": "address"
+    }, {"internalType": "uint256", "name": "rad", "type": "uint256"}],
+    "name": "suck",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{"internalType": "bytes32", "name": "", "type": "bytes32"}, {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+    }],
+    "name": "urns",
+    "outputs": [{"internalType": "uint256", "name": "ink", "type": "uint256"}, {
+        "internalType": "uint256",
+        "name": "art",
+        "type": "uint256"
+    }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "vice",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{"internalType": "address", "name": "", "type": "address"}],
+    "name": "wards",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}];
 
-const FLAP_ADDRESS = "0xdfE0fb1bE2a52CDBf8FB962D5701d7fd0902db9f";
-const MEDIANIZER_ADDRESS = "0x99041F808D598B782D5a3e498681C2452A31da08";
-const VOW_ADDRESS = "0xA950524441892A31ebddF91d3cEEFa04Bf454466";
-const VAT_ADDRESS = "0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B";
-
-var web3;
 var usingRemoteProvider = true;
+
 if (typeof window.ethereum !== 'undefined' && window.ethereum.networkVersion &&
     window.ethereum.networkVersion === "1" && window.ethereum.isMetaMask) {
     try {
@@ -636,8 +970,7 @@ if (typeof window.ethereum !== 'undefined' && window.ethereum.networkVersion &&
     }
 }
 if (usingRemoteProvider) {
-    var infura = "wss://mainnet.infura.io/ws/v3/24537662f67d4531a1e43e486ea45eca";
-    var provider = new Web3.providers.WebsocketProvider(infura);
+    var provider = new Web3.providers.WebsocketProvider(WS_RPC_URL);
     web3 = new Web3(provider);
     console.log("Using remote web3 provider");
 }
@@ -737,10 +1070,10 @@ var showEvents = async function showEvents(someID) {
             values += "ID: <b>" + flapId + "</b> | ";
 
             let lot = event.returnValues.lot / 10 ** 27 / 10 ** 18;
-            values += "lot: " + lot.toFixed(2) + " dai | ";
+            values += "лот (lot): " + lot.toFixed(2) + " mcr | ";
 
             let tab = event.returnValues.bid / 10 ** 18;
-            values += "bid: " + tab.toFixed(4) + " mkr | ";
+            values += "предложение (bid): " + tab.toFixed(4) + " mdt | ";
 
             // Clear and Get current price value
             medianizerPrice = 0;
@@ -768,9 +1101,9 @@ var showEvents = async function showEvents(someID) {
             };
 
             if (medianizerPrice > 0) {
-                values += "Maker MED Price: $" + auctions[flapId]["kickPrice"] + " | ";
+                values += "Официальная цена Monolithos: ₽" + auctions[flapId]["kickPrice"] + " | ";
             } else {
-                values += "Maker MED Price: $---,-- | ";
+                values += "Официальная цена Monolithos: ₽---,-- | ";
             }
         } else if (event.raw.topics[0] === TEND) {
             eventType = "TEND";
@@ -784,11 +1117,11 @@ var showEvents = async function showEvents(someID) {
             values += "ID: <b>" + flapId + "</b> | ";
 
             let lot = parseInt(event.raw.topics[3], 16) / 10 ** 27 / 10 ** 18;
-            values += "lot: " + lot.toFixed(2) + " dai | ";
+            values += "лот (lot): " + lot.toFixed(2) + " mcr | ";
 
             let raw = event.raw.data.slice(288, -248);
             let bid = parseInt(raw, 16) / 10 ** 18;
-            values += "bid: " + bid.toFixed(3) + " mkr | ";
+            values += "предложение (bid): " + bid.toFixed(3) + " mdt | ";
 
             medianizerPrice = 0;
             await updateMedianizerPrice(event.blockNumber);
@@ -809,9 +1142,9 @@ var showEvents = async function showEvents(someID) {
                 } else {
                     values += "" + diff.toFixed(2) + " % | ";
                 }
-                values += "Price: $" + auctions[flapId]["bidPrice"] + " | ";
+                values += "Цена: ₽" + auctions[flapId]["bidPrice"] + " | ";
             } else {
-                values += "--,-- % | Price: $---,-- | ";
+                values += "--,-- % | Цена: ₽---,-- | ";
             }
         } else if (event.raw.topics[0] === DEAL) {
             eventType = "DEAL";
@@ -833,10 +1166,10 @@ var showEvents = async function showEvents(someID) {
             auctions[flapId]["state"] = "CLOSE";
 
             if (!medianizerPrice) {
-                values += "Took Rate: $" + auctions[flapId]["paidPrice"] + " dai/mkr (+-.--%) | ";
-                values += "--,-- % | Price: $---,-- | ";
+                values += "Цена сделки: ₽" + auctions[flapId]["paidPrice"] + " mcr/mdt (+-.--%) | ";
+                values += "--,-- % | Цена: ₽---,-- | ";
             } else {
-                values += "Took Rate: $" + auctions[flapId]["paidPrice"] + " dai/mkr ";
+                values += "Цена сделки: ₽" + auctions[flapId]["paidPrice"] + " mcr/mdt ";
                 let diff = ((auctions[flapId]["paidPrice"] / auctions[flapId]["dealPrice"]) - 1) * 100;
                 if (diff > 0) {
                     values += "(+" + diff.toFixed(2) + "%) ~ ";
@@ -845,13 +1178,13 @@ var showEvents = async function showEvents(someID) {
                     values += "(" + diff.toFixed(2) + "%) ~ ";
                     values += `<b class='detail-btn' onclick='showAuctionDetails(${flapId})'>Lost 📋</b> | `
                 }
-                values += "Price: $" + auctions[flapId]["dealPrice"] + " | ";
+                values += "Цена: ₽" + auctions[flapId]["dealPrice"] + " | ";
             }
         } else if (event.raw.topics[0] === TICK) {
             eventType = "TICK";
             flapId = parseInt(event.raw.topics[2], 16);
             values += "ID: <b>" + flapId + "</b> | ";
-            values += "Time extended! | ";
+            values += "Время продлено! | ";
         } else if (event.raw.topics[0] === FILE) {
             auctions[0] = {id: 0, type: "FILE"};
             eventType = "FILE";
@@ -859,35 +1192,35 @@ var showEvents = async function showEvents(someID) {
             const TAU = "0x7461750000000000000000000000000000000000000000000000000000000000";
             const TTL = "0x74746c0000000000000000000000000000000000000000000000000000000000";
             if (event.raw.topics[2] === BEG) {
-                values += "WHAT: <b> BEG </b> (minimum bid increase) | ";
+                values += "КЛЮЧ: <b> BEG </b> (увеличение минимальной ставки) | ";
                 let file_value = parseInt(event.raw.topics[3]) / 10 ** 18;
                 file_value = (file_value - 1) * 100;
-                values += "VALUE: <b>" + file_value.toFixed(2) + " %</b> | ";
+                values += "ЗНАЧЕНИЕ: <b>" + file_value.toFixed(2) + " %</b> | ";
             } else if (event.raw.topics[2] === TAU) {
-                values += "WHAT: <b> TAU </b> (maximum auction duration) | ";
+                values += "КЛЮЧ: <b> TAU </b> (максимальная продолжительность аукциона) | ";
                 let file_value = parseInt(event.raw.topics[3]);
                 file_value = file_value / 60 / 60;
-                values += "VALUE: <b>" + file_value.toFixed(1) + " hours</b> | ";
+                values += "ЗНАЧЕНИЕ: <b>" + file_value.toFixed(1) + " часов</b> | ";
             } else if (event.raw.topics[2] === TTL) {
-                values += "WHAT: <b> TTL </b> (bid lifetime / max bid duration) | ";
+                values += "ЗНАЧЕНИЕ: <b> TTL </b> (срок действия ставки / максимальная продолжительность ставки) | ";
                 let file_value = parseInt(event.raw.topics[3]);
                 file_value = file_value / 60;
-                values += "VALUE: <b>" + file_value.toFixed(1) + " minutes</b> | ";
+                values += "ЗНАЧЕНИЕ: <b>" + file_value.toFixed(1) + " минут</b> | ";
             } else {
-                values += "WHAT: <b>UKNOWN</b> | ";
+                values += "КЛЮЧ: <b>UKNOWN</b> | ";
                 console.log(event.raw.topics);
             }
-            values += "New Flapper Update! | ";
+            values += "Новое обновление Flapper! | ";
         } else if (event.raw.topics[0] === RELY) {
             eventType = "RELY";
-            values += "WHAT: <b>Allow to call auth'ed methods --</b> | ";
+            values += "ДЕЙСТВИЕ: <b>Разрешить вызывать методы auth'ed --</b> | ";
             let usr = event.raw.topics[2];
-            values += "TO: <b>0x" + usr.slice(-40) + "</b> | ";
+            values += "СУБЪЕКТ: <b>0x" + usr.slice(-40) + "</b> | ";
         } else if (event.raw.topics[0] === DENY) {
             eventType = "DENY";
-            values += "WHAT: <b>Disallow to call auth'ed methods</b> | ";
+            values += "ДЕЙСТВИЕ: <b>Запретить вызывать методы auth'ed</b> | ";
             let usr = event.raw.topics[2];
-            values += "TO: <b>0x" + usr.slice(-40) + "</b> | ";
+            values += "СУБЪЕКТ: <b>0x" + usr.slice(-40) + "</b> | ";
         } else {
             console.log("Uknown event");
             console.log(event);
@@ -903,7 +1236,7 @@ var showEvents = async function showEvents(someID) {
                 auctions[flapId]["txFrom"] = tx.from;
             }
             let txHref = `https://etherscan.io/tx/${event.transactionHash}`;
-            let txLink = `<a target="_blank" href="${txHref}">Tx:..${event.transactionHash.slice(-3)} Info</a>`;
+            let txLink = `<a target="_blank" href="${txHref}">Tx:..${event.transactionHash.slice(-3)} информация</a>`;
             values += `from: ${from} | ${txLink} >>`;
         });
 
@@ -1011,9 +1344,9 @@ function filterAuctionById() {
     }
 }
 
-function showAuctionDetails(id){
+function showAuctionDetails(id) {
     let auction = auctions[id];
-    if (!auction){
+    if (!auction) {
         alert('Error showing auction details');
         return;
     }
@@ -1023,38 +1356,38 @@ function showAuctionDetails(id){
         detailPanel.hide();
     }
 
-    let msg = `> <b>AUCTION ID: ${id}</b>`;
+    let msg = `> <b>АУКЦИОН ID: ${id}</b>`;
     msg += '<hr/>';
 
-    msg += 'Started: <br/>';
-    msg += `- DATE: ${auction.kickDate} <br/>`;
-    msg += `- LOT: ${auction.kickLot.toLocaleString('en')} dai - BID: ${auction.bid.toLocaleString('en')} mkr <br/>`;
-    msg += `- MKR MEDIANIZER: $${auction.kickPrice} mkr/dai <br/><br/>`;
+    msg += 'Начало: <br/>';
+    msg += `- ДАТА: ${auction.kickDate} <br/>`;
+    msg += `- ЛОТ (LOT): ${auction.kickLot.toLocaleString('en')} mcr - ПРЕДЛОЖЕНИЕ (BID): ${auction.bid.toLocaleString('en')} mdt <br/>`;
+    msg += `- MDT MEDIANIZER: ₽${auction.kickPrice} mdt/mcr <br/><br/>`;
 
-    msg += `Bids received: ${auction.tends + auction.dents} <br/><br/>`;
+    msg += `Полученные заявки: ${auction.tends + auction.dents} <br/><br/>`;
 
-    msg += 'Last Bid:<br/>';
-    msg += `- DATE: ${auction.bidDate} <br/>`;
-    msg += `- FROM: ${auction.bidFrom} <br/>`;
-    msg += `- LOT: ${auction.lot.toLocaleString('en')} dai - BID: ${auction.bid.toLocaleString('en')} mkr <br/>`;
-    msg += `- TOOK RATE: $${auction.paidPrice} mkr/dai <br/>`;
-    msg += `- MKR MEDIANIZER: $${auction.bidPrice} mkr/dai <br/><br/>`;
+    msg += 'Последнее предложение:<br/>';
+    msg += `- ДАТА: ${auction.bidDate} <br/>`;
+    msg += `- ОТПРАВИТЕЛЬ: ${auction.bidFrom} <br/>`;
+    msg += `- ЛОТ (LOT): ${auction.lot.toLocaleString('en')} mcr - ПРЕДЛОЖЕНИЕ (BID): ${auction.bid.toLocaleString('en')} mdt <br/>`;
+    msg += `- ЦЕНА СДЕЛКИ: ₽${auction.paidPrice} mdt/mcr <br/>`;
+    msg += `- MDT MEDIANIZER: ₽${auction.bidPrice} mdt/mcr <br/><br/>`;
 
-    msg += 'Ended: <br/>';
-    msg += `- DATE: ${auction.dealDate} <br/>`;
-    msg += `- FROM: ${auction.txFrom} <br/>`;
-    msg += `- TOOK RATE: $${auction.paidPrice} mkr/dai <br/>`;
-    msg += `- MKR MEDIANIZER: $${auction.dealPrice} mkr/dai <br/><br/>`;
+    msg += 'Оконченный: <br/>';
+    msg += `- ДАТА: ${auction.dealDate} <br/>`;
+    msg += `- ОТПРАВИТЕЛЬ: ${auction.txFrom} <br/>`;
+    msg += `- ЦЕНА СДЕЛКИ: ₽${auction.paidPrice} mdt/mcr <br/>`;
+    msg += `- MDT MEDIANIZER: ₽${auction.dealPrice} mdt/mcr <br/><br/>`;
 
 
-    msg += 'Results: <br/>';
+    msg += 'РЕЗУЛЬТАТЫ: <br/>';
     let priceDiff = ((auction["paidPrice"] / auction["dealPrice"]) - 1) * 100;
-    msg += `- TOOK RATE DIFF: ${priceDiff.toFixed(2)}% <br/>`;
-    let daiProfit =  auction.lot - (auction.bid * auction.dealPrice);
-    msg += `- PROFIT: <b>${daiProfit.toLocaleString('en')} dai</b>`;
+    msg += `- РАЗНИЦА В ЦЕНЕ: ${priceDiff.toFixed(2)}% <br/>`;
+    let daiProfit = auction.lot - (auction.bid * auction.dealPrice);
+    msg += `- ПРИБЫЛЬ: <b>${daiProfit.toLocaleString('en')} mcr</b>`;
 
     msg += '<hr/>';
-    msg += '<a style="float: right;" onclick="hideAuctionDetails()">CLOSE<a/>';
+    msg += '<a style="float: right;" onclick="hideAuctionDetails()">ЗАКРЫТЬ<a/>';
 
     if (detailPanel) {
         detailPanel.html(msg);
@@ -1073,19 +1406,19 @@ async function updateGlobals() {
     let globalsPanel = $('#globals');
 
     vatContract.methods.dai(VOW_ADDRESS).call().then(function (value) {
-        let surplus = value  / 10 ** 45;
+        let surplus = value / 10 ** 45;
         vatContract.methods.sin(VOW_ADDRESS).call().then(function (value) {
-            let vow_debt = value  / 10 ** 45;
+            let vow_debt = value / 10 ** 45;
             vowContract.methods.hump().call().then(function (value) {
-                let hump = value  / 10 ** 45;
-                let available = Math.round((surplus - vow_debt - hump) * 100 ) / 100;
+                let hump = value / 10 ** 45;
+                let available = Math.round((surplus - vow_debt - hump) * 100) / 100;
                 globalsPanel.find('#available').text(available.toLocaleString('en'));
             });
         });
     });
 
     vowContract.methods.bump().call().then(function (value) {
-        let bump = Math.round((value  / 10 ** 45) * 10) / 10;
+        let bump = Math.round((value / 10 ** 45) * 10) / 10;
         globalsPanel.find('#bump').text(bump.toLocaleString('en'));
     });
 
@@ -1106,7 +1439,7 @@ async function updateGlobals() {
 
     let lastBlock = await web3.eth.getBlockNumber();
     await updateMedianizerPrice(lastBlock);
-    globalsPanel.find('#mkr').text("$" + medianizerPrice);
+    globalsPanel.find('#mdt').text("₽" + medianizerPrice);
 }
 
 async function loadAllHistory() {

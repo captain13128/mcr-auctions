@@ -637,7 +637,7 @@ if (typeof window.ethereum !== 'undefined' && window.ethereum.networkVersion &&
     }
 }
 if (usingRemoteProvider) {
-    var infura = "wss://mainnet.infura.io/ws/v3/24537662f67d4531a1e43e486ea45eca";
+    var infura = "wss://mainnet.infura.io/ws/v3/683836c8b9384898a9f99d483ae389bc";
     var provider = new Web3.providers.WebsocketProvider(infura);
     web3 = new Web3(provider);
     console.log("使用远程Web3提供程序");
