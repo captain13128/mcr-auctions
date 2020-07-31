@@ -5,3 +5,4 @@ services:
     container_name: mcr-auctions
     ports:
     - "8050:80"
+    restart: always
